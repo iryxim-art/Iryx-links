@@ -25,23 +25,27 @@
     .intro {
         position: fixed;
         top: 0;
-        left: 0;
-        width: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 75%; /* ✅ prend 75 % de la largeur */
         height: 100vh;
         background-color: #030375;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        text-align: center;
         z-index: 10;
         animation: fadeInIntro 1.5s ease forwards;
+        border-radius: 20px; /* optionnel, pour un look plus doux */
     }
 
     .intro img {
-        width: 390px;
+        width: 360px;
         opacity: 0;
         animation: fadeLogo 1.5s ease forwards;
         animation-delay: 0.3s;
+        margin-bottom: 60px; /* équilibre vertical entre le logo et le bouton */
     }
 
     @keyframes fadeLogo {
@@ -50,15 +54,15 @@
     }
 
     .intro button {
-        margin-top: 80px;
         background-color: #ffffff;
         color: #030375;
         border: none;
-        font-size: 22pt;
-        padding: 20px 60px;
+        font-size: 28pt; /* ✅ plus gros texte */
+        padding: 25px 80px; /* ✅ bouton plus grand */
         cursor: pointer;
-        border-radius: 6px;
-        font-weight: 500;
+        border-radius: 10px;
+        font-weight: 600;
+        letter-spacing: 1px;
     }
 
     .intro button.clicked {
@@ -126,8 +130,9 @@
     .link-block a {
         text-decoration: none;
         color: #000000;
-        font-size: 60pt;
-        font-weight: 100;
+        font-family: 'Montserrat', sans-serif; /* ✅ même police que le bouton */
+        font-size: 50pt; /* ✅ réduit de 10pt */
+        font-weight: 500;
         display: flex;
         align-items: center;
         gap: 25px;
@@ -147,12 +152,21 @@
     }
 
     @media (max-width: 768px) {
+        .intro {
+            width: 90%;
+        }
+        .intro img {
+            width: 260px;
+            margin-bottom: 40px;
+        }
+        .intro button {
+            font-size: 20pt;
+            padding: 20px 60px;
+        }
         .header h1 { font-size: 72pt; }
         .header p { font-size: 36pt; }
-        .link-block a { font-size: 40pt; }
+        .link-block a { font-size: 34pt; }
         .link-block img { width: 50px; height: 50px; }
-        .intro img { width: 280px; }
-        .intro button { font-size: 16pt; padding: 15px 40px; }
     }
 </style>
 </head>
@@ -198,7 +212,7 @@
         setTimeout(() => {
             intro.style.opacity = '0';
             intro.style.pointerEvents = 'none';
-            intro.style.display = 'none'; // 🔥 on cache complètement l’intro
+            intro.style.display = 'none';
             page.classList.add('active');
         }, 800);
     });
