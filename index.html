@@ -25,27 +25,33 @@
     .intro {
         position: fixed;
         top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 75%; /* ✅ prend 75 % de la largeur */
+        left: 0;
+        width: 100%; /* ✅ pleine largeur */
         height: 100vh;
         background-color: #030375;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+        animation: fadeInIntro 1.5s ease forwards;
+    }
+
+    .intro-content {
+        width: 75%; /* ✅ le contenu seulement limité à 75 % */
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
-        z-index: 10;
-        animation: fadeInIntro 1.5s ease forwards;
-        border-radius: 20px; /* optionnel, pour un look plus doux */
     }
 
     .intro img {
-        width: 360px;
+        width: 550px;
+		max-width: 90%;
         opacity: 0;
         animation: fadeLogo 1.5s ease forwards;
         animation-delay: 0.3s;
-        margin-bottom: 60px; /* équilibre vertical entre le logo et le bouton */
+        margin-bottom: 60px;
     }
 
     @keyframes fadeLogo {
@@ -57,8 +63,8 @@
         background-color: #ffffff;
         color: #030375;
         border: none;
-        font-size: 28pt; /* ✅ plus gros texte */
-        padding: 25px 80px; /* ✅ bouton plus grand */
+        font-size: 28pt;
+        padding: 25px 80px;
         cursor: pointer;
         border-radius: 10px;
         font-weight: 600;
@@ -91,6 +97,7 @@
     }
 
     .header {
+		height: 35%;
         width: 100%;
         background-color: #f4195d;
         display: flex;
@@ -102,6 +109,7 @@
     }
 
     .header h1 {
+		font-family: "Gill Sans", "Gill Sans MT", "Myriad Pro", "DejaVu Sans Condensed", Helvetica, Arial, "sans-serif";
         color: #ffffff;
         font-size: 122pt;
         font-weight: 600;
@@ -130,8 +138,8 @@
     .link-block a {
         text-decoration: none;
         color: #000000;
-        font-family: 'Montserrat', sans-serif; /* ✅ même police que le bouton */
-        font-size: 50pt; /* ✅ réduit de 10pt */
+        font-family: 'Montserrat', sans-serif;
+        font-size: 50pt;
         font-weight: 500;
         display: flex;
         align-items: center;
@@ -152,7 +160,7 @@
     }
 
     @media (max-width: 768px) {
-        .intro {
+        .intro-content {
             width: 90%;
         }
         .intro img {
@@ -175,8 +183,10 @@
 
     <!-- ÉCRAN D'INTRO -->
     <div class="intro" id="intro">
-        <img src="logo-iryx-web.png" alt="IRYX Logo">
-        <button id="showLinks">Voir les liens</button>
+        <div class="intro-content">
+            <img src="logo-iryx-web.png" alt="IRYX Logo">
+            <button id="showLinks">Voir les liens</button>
+        </div>
     </div>
 
     <!-- PAGE DE LIENS -->
