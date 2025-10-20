@@ -6,29 +6,95 @@
 
 <style>
     @import url('https://fonts.cdnfonts.com/css/adelle-sans');
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600&display=swap');
+
+    * {
+        box-sizing: border-box;
+        transition: all 0.4s ease;
+    }
 
     body {
         margin: 0;
         padding: 0;
-        font-family: 'Adelle Sans', sans-serif;
+        font-family: 'Montserrat', sans-serif;
+        background-color: #ffffff;
+        overflow-x: hidden;
+    }
+
+    /* ----------- ÉCRAN D'INTRO ----------- */
+    .intro {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: #030375;
         display: flex;
         flex-direction: column;
         align-items: center;
-        background-color: #ffffff;
+        justify-content: center;
+        z-index: 10;
+        animation: fadeInIntro 1.5s ease forwards;
     }
 
-    /* Rectangle supérieur */
+    .intro img {
+        width: 390px;
+        opacity: 0;
+        animation: fadeLogo 1.5s ease forwards;
+        animation-delay: 0.3s;
+    }
+
+    @keyframes fadeLogo {
+        0% { opacity: 0; transform: scale(0.9); }
+        100% { opacity: 1; transform: scale(1); }
+    }
+
+    .intro button {
+        margin-top: 80px;
+        background-color: #ffffff;
+        color: #030375;
+        border: none;
+        font-size: 22pt;
+        padding: 20px 60px;
+        cursor: pointer;
+        border-radius: 6px;
+        font-weight: 500;
+    }
+
+    .intro button.clicked {
+        background-color: transparent;
+        border: 2px solid #ffffff;
+        color: #ffffff;
+    }
+
+    @keyframes fadeInIntro {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    /* ----------- PAGE DE LIENS ----------- */
+    .page {
+        opacity: 0;
+        transform: translateY(40px);
+        pointer-events: none;
+        transition: all 1s ease;
+    }
+
+    .page.active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: all;
+    }
+
     .header {
         width: 100%;
-        min-height: calc(25vh + 50px);
         background-color: #f4195d;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
-        padding-top: 50px;
-        box-sizing: border-box;
+        padding: 50px 0;
     }
 
     .header h1 {
@@ -43,81 +109,100 @@
         font-size: 50pt;
         font-weight: 400;
         line-height: 56pt;
-        margin: 0 0 50px 0;
+        margin: 0;
     }
 
-    /* Blocs de liens */
     .link-block {
         margin-top: 150px;
         width: 80%;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        gap: 40px;
+        gap: 60px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .link-block a {
         text-decoration: none;
         color: #000000;
-        font-size: 60pt; /* augmenté */
-        font-weight: 100; /* thin */
+        font-size: 60pt;
+        font-weight: 100;
         display: flex;
         align-items: center;
         gap: 25px;
+        padding: 10px 20px;
+        border-radius: 10px;
+        transition: all 0.3s ease;
     }
 
     .link-block img {
-        width: 70px; /* augmenté */
+        width: 70px;
         height: 70px;
+        transition: all 0.3s ease;
     }
 
-    /* Ajustement responsive */
+    .link-block a:active {
+        outline: 4px solid #f4195d;
+    }
+
     @media (max-width: 768px) {
-        .header h1 {
-            font-size: 72pt;
-        }
-        .header p {
-            font-size: 36pt;
-            line-height: 40pt;
-            margin-bottom: 30px;
-        }
-        .link-block a {
-            font-size: 40pt;
-        }
-        .link-block img {
-            width: 50px;
-            height: 50px;
-        }
-        .link-block {
-            margin-top: 60px;
-            width: 90%;
-        }
+        .header h1 { font-size: 72pt; }
+        .header p { font-size: 36pt; }
+        .link-block a { font-size: 40pt; }
+        .link-block img { width: 50px; height: 50px; }
+        .intro img { width: 280px; }
+        .intro button { font-size: 16pt; padding: 15px 40px; }
     }
 </style>
-
 </head>
 
 <body>
 
-    <div class="header">
-        <h1>IRYX</h1>
-        <p>Image de Marque</p>
+    <!-- ÉCRAN D'INTRO -->
+    <div class="intro" id="intro">
+        <img src="logo-iryx-web.png" alt="IRYX Logo">
+        <button id="showLinks">Voir les liens</button>
     </div>
 
-    <div class="link-block">
-        <a href="https://www.instagram.com/iryx_im/" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
-            Instagram
-        </a>
-        <a href="https://www.facebook.com/profile.php?id=61580891266654&rdid=d2fOjgaxNxfXTc4U#" target="_blank">
-            <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
-            Facebook
-        </a>
-        <a href="https://www.behance.net/marianedub" target="_blank">
-            <img src="https://img.favpng.com/7/18/9/logo-design-behance-logo-on-black-circle-jUfYvMg9.jpg" alt="Behance">
-            Mon portfolio (Behance)
-        </a>
+    <!-- PAGE DE LIENS -->
+    <div class="page" id="page">
+        <div class="header">
+            <h1>IRYX</h1>
+            <p>Image de Marque</p>
+        </div>
+
+        <div class="link-block">
+            <a href="https://www.instagram.com/iryx_im/" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+                Instagram
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61580891266654" target="_blank">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733547.png" alt="Facebook">
+                Facebook
+            </a>
+            <a href="https://www.behance.net/marianedub" target="_blank">
+                <img src="https://img.favpng.com/7/18/9/logo-design-behance-logo-on-black-circle-jUfYvMg9.jpg" alt="Behance">
+                Mon portfolio (Behance)
+            </a>
+        </div>
     </div>
+
+<script>
+    const button = document.getElementById('showLinks');
+    const intro = document.getElementById('intro');
+    const page = document.getElementById('page');
+
+    button.addEventListener('click', () => {
+        button.classList.add('clicked');
+        setTimeout(() => {
+            intro.style.opacity = '0';
+            intro.style.pointerEvents = 'none';
+            intro.style.display = 'none'; // 🔥 on cache complètement l’intro
+            page.classList.add('active');
+        }, 800);
+    });
+</script>
 
 </body>
 </html>
